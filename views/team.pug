@@ -1,0 +1,95 @@
+extends layout
+
+block content
+  include ./components/navbar
+  section.hero
+    div.container.has-text-centered
+      h1.title
+        img(src='/images/Logo.png', alt=title, style='width:3em; height:auto;')
+      h2.subtitle= title
+  section.section
+    div.container.has-text-centered
+      h3.is-size-3 Our Team
+      p We are a team of highly-motivated individuals that love to make games.
+      p We started as a small student group and with  each small project we took we learned and grew until we could call ourselves a studio.
+      p Stairs Productions is all about the people, so here we are!
+
+  if members.length > 0
+    section.section
+      div.container.is-fluid
+        h3.is-size-3.has-text-centered Core Team
+        div.columns
+        - var n = 0;
+        while n < members.length
+          if (n%3 == 0)
+            unless (n == 0)
+              | </div>
+            | <div class='columns'>
+            |    <div class='column is-4'>
+          else
+            |    <div class='column is-4'>
+
+          - var name = members[n].dataValues.name
+          - var bio = members[n].dataValues.bio
+          - var role = members[n].dataValues.role
+          - var picture = members[n].dataValues.picture
+          - var email = members[n].dataValues.email
+          - var website = members[n].dataValues.website
+          div.card.fullheight
+              div.card-image
+                figure.image.is-4by3
+                  img.image-contain(src=picture)
+              div.card-content
+                p.title.is-4=name
+                p.subtitle.is-6=role
+                div.content
+                  p=bio
+              footer.card-footer
+                if email
+                  a.card-footer-item(href='mailto:'+email) Email
+                if website
+                  a.card-footer-item(href=website) Website
+          | </div>
+          - n++
+
+        
+  if partners.length > 0
+    section.section
+      div.container
+        h3.is-size-3.has-text-centered Friends and Partners
+        div.columns
+        - var n = 0;
+        while n < partners.length
+          if (n%3 == 0)
+            unless (n == 0)
+              | </div>
+            | <div class='columns'>
+            |    <div class='column is-4'>
+          else
+            |    <div class='column is-4'>
+
+          - var name = partners[n].dataValues.name
+          - var bio = partners[n].dataValues.bio
+          - var role = partners[n].dataValues.role
+          - var picture = partners[n].dataValues.picture
+          - var email = partners[n].dataValues.email
+          - var website = partners[n].dataValues.website
+          div.card.fullheight
+              div.card-image
+                figure.image.is-2by1
+                  img.image-contain(src=picture)
+              div.card-content
+                p.title.is-4=name
+                p.subtitle.is-6=role
+                div.content
+                  p=bio
+              footer.card-footer
+                if email
+                  a.card-footer-item(href='mailto:'+email) Email
+                if website
+                  a.card-footer-item(href=website) Website
+          | </div>
+          - n++
+
+  
+  include ./components/footer

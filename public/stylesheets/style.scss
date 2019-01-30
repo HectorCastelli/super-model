@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+// Bulma Customization
+// Change fonts
+@import url('https://fonts.googleapis.com/css?family=Lato|Source+Sans+Pro');
+$family-sans-serif: 'Lato', sans-serif;
+$family-secondary: 'Source Sans Pro', sans-serif;
+
+// Set brand colors
+$darkblue: rgb(0, 65, 108);
+$lightblue: rgb(37,128,193);
+$darkgrey: rgb(119, 119, 119);
+$lightgrey: lighten($darkgrey, 15%);
+
+
+$grey-dark: $darkgrey;
+$grey-light: $lightgrey;
+$primary: $lightblue;
+$link: $darkblue;
+
+$input-border-color: transparent;
+
+@import "../../node_modules/bulma/bulma.sass";
+
+
+//Font Awesome
+//@import "./fontawesome/fontawesome.scss";
+//@import "./fontawesome/solid.scss";
+//@import "./fontawesome/brands.scss";
+
+// Patterns
+@import "pattern/topology";
+
+// Custom CSS
+@import "_customclasses";

@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  include ./components/navbar
+  section.hero
+    div.container.has-text-centered
+      h1.title
+        img(src='/images/Logo.png', alt=title, style='width:3em; height:auto;')
+      h2.subtitle=post.dataValues.title
+      h3.is-size-4=post.dataValues.description
+  section.hero.is-medium
+    div.container.is-fluid
+      figure.image
+          img.image-highlight(src=post.dataValues.picture)
+      p.has-text-right='Published at: '+moment(post.dataValues.createdAt).format('MM/DD/YYYY')
+  section.section
+    div.container.is-fluid
+      div.content.
+        !{markdown.render(post.dataValues.content)}
+
+  include ./components/footer

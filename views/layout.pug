@@ -1,0 +1,56 @@
+doctype html
+html
+  head
+    if title
+      title= title
+    else if config.website.title
+      - var title= config.website.title
+      title= title
+    
+    meta(charset='utf-8')
+
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+
+    link(rel='shortcut icon', type='image/x-icon', href='/favicon.ico')
+
+    if config.website.description
+      meta(name='description', content=config.website.description)
+    if config.website.author
+      each author in config.website.author
+        meta(name='author', content=author.name)
+
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    if config.website.useicons
+      link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.5.0/css/all.css', integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU', crossorigin='anonymous')
+
+    script(src='/javascript/features.js')
+      
+    block head
+  body
+    if config.website.maintenance
+      div.modal.is-active
+        div.modal-background
+        div.model-content.has-text-centered
+          div.box
+            h1.subtitle The website is currently Under Maintenance. If something seems out of place, it will most likely be fixed soon.
+            p If you wish to talk to someone about this, contact us at contact@stairs.productions or support@stairs.productions
+        button.modal-close.is-large(aria-label='close')
+      script.
+        document.addEventListener('DOMContentLoaded', () => {
+          // Get all 'modal-close' elements
+          const $modalClose = Array.prototype.slice.call(document.querySelectorAll('.modal-close'), 0);
+
+          // Check if there are any navbar burgers
+          if ($modalClose.length > 0) {
+
+              // Add a click event on each of them
+              $modalClose.forEach( el => {
+              el.addEventListener('click', () => {
+                  el.parentElement.classList.toggle('is-active');
+
+              });
+              });
+          }
+        });
+    block content
+

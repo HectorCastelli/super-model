@@ -1,0 +1,8 @@
+footer.footer
+    div.content.has-text-centered
+        p Copyright © 20XX Company - All Rights Reserved.
+    div.content.has-text-right
+        each item in networks
+            a(href=item.dataValues.link)
+                span.icon.is-medium
+                    i.fab(class=item.dataValues.icon, alt=item.dataValues.name)

@@ -44,10 +44,13 @@ db.Sequelize = Sequelize;
 // db.sequelize.sync({force:true});
 
 // Import Models such that I can use them in the api just by importing 'db'
+db.globalVariable = require('./models/GlobalVariable')(sequelize, Sequelize);
 db.blogPost = require('./models/BlogPosts')(sequelize, Sequelize);
+db.socialNetwork = require('./models/SocialNetwork')(sequelize, Sequelize);
+db.subscriber = require('./models/Subscriber')(sequelize, Sequelize);
 db.member = require('./models/Member')(sequelize, Sequelize);
 db.game = require('./models/Game')(sequelize, Sequelize);
-db.adminLogin = require('./models/AdminLogin')(sequelize, Sequelize);
+db.gameCredits = require('./models/GameCredits')(sequelize, Sequelize);
 
 //Relationships
 db.blogPost.belongsToMany(db.member, {
@@ -59,10 +62,25 @@ db.game.hasMany(db.blogPost, {
   foreignKey: 'GameId'
 });
 
-db.datatypes = [db.adminLogin,
+db.gameCredits.belongsTo(db.member);
+db.gameCredits.belongsTo(db.game);
+db.game.hasMany(db.gameCredits, {
+  as: 'Credits',
+  foreignKey: 'GameId'
+});
+db.member.hasMany(db.gameCredits, {
+  as: 'Member',
+  foreignKey: 'MemberId'
+});
+
+db.datatypes = [
+  db.globalVariable,
   db.blogPost,
+  db.socialNetwork,
+  db.subscriber,
   db.member,
-  db.game
+  db.game,
+  db.gameCredits
 ];
 
 module.exports = db;

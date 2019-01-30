@@ -1,0 +1,60 @@
+extends layout
+
+block content
+  include ./components/navbar
+  section.hero
+    div.container.has-text-centered
+      h1.title
+        img(src='/images/Logo.png', alt=title, style='width:3em; height:auto;')
+      h2.title=game.dataValues.name
+      div.container
+          p=game.dataValues.description
+  section.hero.is-medium
+    div.container.is-fluid
+      figure.image
+          img.image-highlight(src=game.dataValues.picture)
+  section.section
+    div.container.is-fluid
+      div.content.
+        !{markdown.render(game.dataValues.content)}
+  section.section
+    div.container
+      h3.title Credits
+      ul
+        each credit in credits
+          li #{credit.dataValues.role} - #{credit.dataValues.Member.name}
+  if posts
+    if posts.length > 0
+      section.section
+        div.container
+          h3.is-size-3.has-text-centered News And Updates
+          div.columns
+          - var n = 0;
+          while n < posts.length
+            if (n%3 == 0)
+              unless (n == 0)
+                | </div>
+              | <div class='columns'>
+              |    <div class='column is-4'>
+            else
+              |    <div class='column is-4'>
+            - var title = posts[n].dataValues.title
+            - var description = posts[n].dataValues.description
+            - var timestamp = posts[n].dataValues.createdAt
+            - var picture = posts[n].dataValues.picture
+            - var permalink = posts[n].dataValues.permalink
+            a(href='/blog/'+permalink)
+              div.card.fullheight
+                div.card-image
+                  figure.image.is-4by3
+                    if picture
+                      img.image-contain(src=picture)
+                div.card-content
+                  p.title=title
+                  div.content
+                    p=description
+                  p.has-text-right.has-text-grey-light=moment(timestamp).format('MM/DD/YYYY')
+            | </div>
+            - n++
+
+  include ./components/footer

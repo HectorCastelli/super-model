@@ -1,0 +1,18 @@
+{
+    "website": {
+        "title": "Super Model Example",
+        "baseulr": "http://",
+        "author": [
+            {
+            "name": "Hector Castelli Zacharias",
+            "email": "hector@stairs.productions"
+            }
+        ],
+        "description": "Super Model Example Website",
+        "useicons": true,
+        "maintenance": false
+    },
+    "custom": {
+        
+    }
+}

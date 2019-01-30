@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  section.section
+    div.container.has-text-centered
+      div.columns
+        div.column.is-half.is-offset-one-quarter
+          div.card
+            div.card-header
+              p.card-header-title Login
+            div.card-image
+              span.icon.is-large
+                i.fas.fa-lock.fa-3x
+            div.card-content
+              if error
+                p Error loggin in!
+              form(action='/admin/auth', method='POST')
+                div.field
+                  div.control
+                    h4.has-4 E-mail (use admin@test.example)
+                      input.input(type='text',name='email', id='email')
+                div.field
+                  div.control
+                    h4.has-4 Password (use admin)
+                      input.input(type='password',name='password', id='password')
+                div.field
+                  div.control
+                    button.button.is-success.is-large.is-fullwidth(action='Submit') Authenticate
+              p Log in with your e-mail and password.
+
+  include ./components/footer

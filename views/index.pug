@@ -1,0 +1,54 @@
+extends layout
+
+block content
+  include ./components/navbar
+  section.hero
+    div.container.has-text-centered
+      h1.title= title
+      h2.subtitle= config.website.description
+
+  section.section
+    div.container.has-text-centered
+      a.button.is-large.is-primary.is-outlined#knowmore Want to know more?
+      form.is-collapsable.is-closed#subscribeform(action='subscribe', method='GET')
+        h4.is-size-5 Sign up to hear about our shenanigans.
+        div.field.has-addons.has-addons-centered
+          div.control
+            input.input.is-large(type='email', placeholder='Email', id='email', name='email')
+          div.control
+            button.button.is-info.is-large(type='submit') Subscribe
+    script.
+      document.addEventListener('DOMContentLoaded', () => {
+        const $knowmore = document.getElementById('knowmore');
+        const $subscribeform = document.getElementById('subscribeform');
+        $knowmore.onclick = function() {
+          if($knowmore.innerText === "Want to know more?") {
+            $knowmore.innerText = "Maybe another time?"
+          } else {
+            $knowmore.innerText = "Want to know more?"
+          }
+          $knowmore.classList.toggle('is-primary');
+          $knowmore.classList.toggle('is-danger');
+
+          $subscribeform.classList.toggle('is-closed');
+        };
+      });
+
+  if posts.length > 0
+    section.section
+      div.container.is-fluid
+        h3.is-size-3 You can hear more about us here!
+        div.columns
+          for post in posts
+            div.column
+              a(href='/blog/'+post.dataValues.permalink)
+                div.card.fullheight
+                  div.card-image
+                    figure.image.is-4by3
+                      if post.dataValues.picture
+                        img.image-contain(src=post.dataValues.picture)
+                  div.card-content
+                    p.title.is-4=post.dataValues.title
+                    div.content=post.dataValues.description
+                    p.has-text-right.has-text-grey-light=moment(post.dataValues.createdAt).format('MM/DD/YYYY')
+  include ./components/footer
